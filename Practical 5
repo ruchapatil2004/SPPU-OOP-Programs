@@ -1,0 +1,55 @@
+/*Write a function template for selection sort that inputs, sorts and outputs an integer array and a
+float array.*/
+
+#include<iostream>
+using namespace std;
+class selection{
+    public:
+    int n,a[10];
+    template <class T> void getdata(T a[],int n){
+        cout<<"Enter the elements: "<<endl;
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+        }
+    }
+    template <class T> void display(T a[],int n){
+        for (int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(a[i]>a[j]){
+                    T temp;
+                    temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+    
+        cout<<"The correct sequence is: "<<endl;
+        for(int i=0;i<n;i++){
+            cout<<"\t"<<a[i]<<endl;
+        }
+    }
+};
+int main(){
+    int n,p;
+    selection s;
+    do{
+        cout<<"Enter your choice:\n1.For integers.\n2.For Float.\n"<<endl;
+        cin>>p;
+        switch(p){
+            case 1:{
+            int a[n];
+            cout<<"Enter the number of elements: "<<endl;
+            cin>>n;
+            s.getdata(a,n);
+            s.display(a,n);
+            break;}
+            case 2:{
+            float b[n];
+            cout<<"Enter the number of elements: "<<endl;
+            cin>>n;
+            s.getdata(b,n);
+            s.display(b,n);
+            break;}
+        }
+    }while(1>0);
+}
