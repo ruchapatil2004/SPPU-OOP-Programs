@@ -1,0 +1,114 @@
+/*Develop a program in C++ to create a database of student’s information system containing the
+following information: Name, Roll number, Class, Division, Date of Birth, Blood group,
+Contact address, Telephone number, Driving license no. and other. Construct the database with
+suitable member functions. Make use of constructor, default constructor, copy constructor,
+destructor, static member functions, friend class, this pointer, inline code and dynamic memory
+allocation operators-new and delete as well as exception handling.*/
+
+#include<iostream>
+#include<string>
+using namespace std;
+class student{
+    public:
+    string name,Class;
+    char Div;
+    int roll_no;
+    string dob;
+    static int id;
+    void getdata();
+    void display();
+    static void showid(){
+        id++;
+        cout<<id;
+        
+    }
+    student(){
+        name = "Rucha";
+        Class = "SE";
+        Div = 'b';
+        roll_no = 21;
+        dob = 03/03/2003;   
+    }
+    student(student &x){
+        this->name=x.name;
+        this->Class=x.Class;
+        this->Div=x.Div;
+        this->roll_no=x.roll_no;
+        this->dob=x.dob;
+    }
+    ~ student(){
+        cout<<"\nMemory Deleted";
+    }
+};
+class personal{
+    string blood;
+    long long int phone,tel,license;
+    friend class student;
+};
+void student:: getdata(){
+    personal s;
+    cout<<"\nEnter the name: "<<endl;
+    cin>>name;
+    cout<<"Enter the Class: "<<endl;
+    cin>>Class;
+    b:
+    cout<<"Enter the Division: "<<endl;
+    cin>>Div;
+
+    try{
+            if(isdigit(Div)==true){
+                throw Div;
+            }
+        }
+        catch(char Div){
+            cout<<"Exception occur ...!!!\n";
+            goto b;
+        }
+
+    cout<<"Enter the Roll. No.: "<<endl;
+    cin>>roll_no;
+    cout<<"Enter the DOB: "<<endl;
+    cin>>dob;
+    // cout<<"Enter the blood group: "<<endl;
+    // cin>>s.blood;
+    cout<<"Enter the phone number: "<<endl;
+    cin>>s.phone;
+    cout<<"Enter the telephone number: "<<endl;
+    cin>>s.tel;
+    cout<<"Enter the Driving License: "<<endl;
+    cin>>s.license;
+}
+void student :: display(){
+        personal s;
+        cout<<"\nName: "<<name<<endl;
+        cout<<"Class: "<<Class<<endl;
+        cout<<"Division: "<<Div<<endl;
+        cout<<"Roll. No.: "<<roll_no<<endl;
+        cout<<"DOB: "<<dob<<endl;
+        cout<<"Blood Group: "<<s.blood<<endl;
+        cout<<"Phone Number: "<<s.phone<<endl;
+        cout<<"Telephone Number: "<<s.tel<<endl;
+        cout<<"Driving License: "<<s.license<<endl;
+}
+int student::id;
+int main(){
+     int n;
+     student *s;
+     cout<<"\nEnter the number of Students: "<<endl;
+     cin>>n;
+     s = new student[n];
+     for (int i=0;i<n;i++){
+         cout<<"Database of Student: "<<endl;
+         student::showid();
+         s[i].getdata();
+         s[i].display();
+     }
+     delete s;
+
+
+    student t;
+    t.getdata();
+    student s1(t);
+    s1.display();
+    
+}
