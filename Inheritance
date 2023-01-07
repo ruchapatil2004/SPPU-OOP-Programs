@@ -1,0 +1,108 @@
+/*Imagine a publishing company which does marketing for book and audio cassette versions.
+Create a class publication that stores the title (a string) and price (type float) of publications.
+From this class derive two classes: book which adds a page count (type int) and tape which adds
+a playing time in minutes (type float).
+Write a program that instantiates the book and tape class, allows user to enter data and displays
+the data members. If an exception is caught, replace all the data member values with zero
+values.*/
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+class publication{
+    public:
+    string title;
+    int price;
+    void getdata(){
+        b:
+        cout<<"Enter the title: "<<endl;
+        cin>>title;
+
+        int flag=0;
+        for(int i=0;i<title.length();i++){
+            if(isdigit(title[i])==true){
+                flag=1;
+            }
+        }
+
+        try{
+            if(flag==1){
+                throw flag;
+            }
+        }
+        catch(int flag){
+            cout<<"Exception occur ...!!!\n";
+            goto b;
+        }
+
+        cout<<"Enter the Price: "<<endl;
+        cin>>price;
+    }
+    void display(){
+        cout<<"Title: "<<title<<endl;
+        cout<<"Price: "<<price<<endl;
+    }
+};
+class book:public publication{
+    public:
+    int pages;
+    void getdata1(){
+        publication::getdata();
+        cout<<"Enter the Pagecount: "<<endl;
+        cin>>pages;
+    }
+    void display1(){
+        publication::display();
+        cout<<"Pagecount: "<<pages<<endl;
+    }
+};
+class tape: public publication{
+    public:
+    int time;
+    void getdata2(){
+        publication::getdata();
+        cout<<"Enter the time: "<<endl;
+        cin>>time;
+        }
+        void display2(){
+            publication::display();
+            cout<<"Playing Time: "<<time<<endl;
+        }
+};
+int main(){
+    int p;
+    int r=0,s=0;
+    book b;
+    tape t;
+    do{
+        cout<<"\nEnter your choice:\n1.Enter the book data.\n2.Display book data.\n3.Enter tape data.\n4.Display tape data.\n"<<endl;
+        cin>>p;
+        switch(p){
+            case 1:
+            b.getdata1();
+            r=r+1;
+            break;
+            case 2:
+            if(r>0){
+                b.display1();
+            }
+            else{
+                cout<<"Enter the details first..."<<endl;
+            }
+            break;
+            case 3:
+            t.getdata2();
+            s=s+1;
+            break;
+            case 4:
+            if(s>0){
+                t.display2();
+            }
+            else{
+                cout<<"Enter the details first..."<<endl;
+            }
+            break;
+        }
+    }while(p<5);
+}
